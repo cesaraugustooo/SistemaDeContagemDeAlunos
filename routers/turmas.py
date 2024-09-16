@@ -2,7 +2,6 @@ from fastapi import APIRouter
 from fastapi import FastAPI, HTTPException
 from schemas.turmas import TurmaCreate, TurmaRead, TurmaReadAll, turma_atualizado
 from models.turmas import Turma,Categoria
-from playhouse.shortcuts import model_to_dict
 
 router = APIRouter(prefix='/turmas', tags=['Turmas'])
 

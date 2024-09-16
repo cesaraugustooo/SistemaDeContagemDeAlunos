@@ -1,5 +1,4 @@
-from peewee import CharField, AnyField, Model, AutoField, ForeignKeyField
-from peewee import *
+from peewee import CharField, Model, AutoField, ForeignKeyField
 from config.database import database
 
 class Categoria(Model):

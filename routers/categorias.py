@@ -7,16 +7,17 @@ router = APIRouter(prefix='/categoria', tags=['Categorias'])
 
 
 
-@router.post(path="/categoria", response_model=CategoriaRead)
+@router.post(path="", response_model=CategoriaRead)
 def create_turma(categoria: CategoriaSchemaCreate):
     create_categoria = Categoria.create(**categoria.model_dump())
 
     return create_categoria
 
 
-@router.get(path='/categoria', response_model=CategoriaList)
+@router.get(path='', response_model=CategoriaList)
 def listar_categoria():
     categorias = Categoria.select()
     return  {'categorias':categorias}
+
 
 

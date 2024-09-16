@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 router = APIRouter(prefix='/usuarios', tags=['Usuarios'])
 
 
-@router.get(path="/usuarios", response_model=UsuarioReadAll)
+@router.get(path="", response_model=UsuarioReadAll)
 def listar_usuarios():
     usuarios = UsuarioDb.select()
     return {'usuarios':usuarios}
@@ -15,14 +15,14 @@ def listar_usuarios():
 
 
 
-@router.get(path="/usuarios/{id_usuario}",response_model=UsuarioRead)
+@router.get(path="/{id_usuario}",response_model=UsuarioRead)
 def listar_usuarios(id_usuario: int):
     usuario= UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
     return usuario
 
 
 
-@router.post(path="/usuarios/postar", response_model=UsuarioRead)
+@router.post(path="", response_model=UsuarioRead)
 def postar_usuario(novo_usuario: UsuarioCreate):
     postar = UsuarioDb.create(**novo_usuario.model_dump())
 
@@ -30,7 +30,7 @@ def postar_usuario(novo_usuario: UsuarioCreate):
 
 
 
-@router.delete(path="/usuarios/delete", response_model=UsuarioRead)
+@router.delete(path="/delete", response_model=UsuarioRead)
 def deletar_usuario(id_usuario: int):
     delete = UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
 
@@ -40,7 +40,7 @@ def deletar_usuario(id_usuario: int):
 
 
 
-@router.patch(path="/usuarios/l{id_usuario}", response_model=UsuarioRead)
+@router.patch(path="{id_usuario}", response_model=UsuarioRead)
 def atualizar_usuario(id_usuario, usuario_atualizado:usuario_atualizado):
     usuario = UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
 
