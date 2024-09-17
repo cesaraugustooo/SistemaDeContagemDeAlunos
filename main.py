@@ -12,7 +12,6 @@ app = FastAPI()
 app.add_event_handler(event_type='startup', func=conect)
 app.add_event_handler(event_type='shutdown',func=end_database)
 
-app.include_router(turma_router)
 app.include_router(categorias_router)
 app.include_router(usuarios_router)
 app.include_router(tipos_router)

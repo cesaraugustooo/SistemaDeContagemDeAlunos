@@ -8,11 +8,4 @@ class Categoria(Model):
         database = database
 
 
-class Turma(Model):
-    id = AutoField()
-    nome_turma = CharField()
-    id_categorias_turma = ForeignKeyField(Categoria, backref='categorias')
-
-    class Meta:
-        database = database
 

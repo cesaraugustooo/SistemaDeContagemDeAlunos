@@ -10,12 +10,6 @@ def criar_contagens(contagem : ContagemCreate):
     Contagem = ContagensDB.create(**contagem.model_dump())
     return Contagem
 
-@router.delete(path='',response_model=ContagemRead)
-def list_contagens(id : int):
-    contagens = ContagensDB.get_or_none(ContagensDB.id == id)
-    contagens.delete_instance()
-    return contagens
-
 @router.get(path='/{id}',response_model=ContagemRead)
 def list_contagens(id : int):
     contagens = ContagensDB.get_or_none(ContagensDB.id == id)
@@ -28,6 +22,9 @@ def list_all_contagens():
 
 @router.patch(path='',response_model=ContagemRead)
 def list_contagens(id : int, con : ContagemUpdate):
+
+    
+
     contagens = ContagensDB.get_or_none(ContagensDB.id == id)
     contagens.data = con.data
     contagens.hora = con.hora

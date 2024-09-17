@@ -12,7 +12,6 @@ class ContagemCreate(BaseModel):
     qtd_contagem : int
     tipo : int
     usuario : int
-    turma : int
 
 class ContagemRead(BaseModel):
     id : int
@@ -21,7 +20,6 @@ class ContagemRead(BaseModel):
     qtd_contagem : int
     tipo : TipoRead
     usuario : UsuarioRead
-    turma : TurmaRead
 
 class ContagemUpdate(BaseModel):
     data : datetime
@@ -29,7 +27,6 @@ class ContagemUpdate(BaseModel):
     qtd_contagem : int
     tipo : int
     usuario : int
-    turma : int
 
 
 class ContagemReadAll(BaseModel):

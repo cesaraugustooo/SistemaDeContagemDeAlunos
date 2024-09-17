@@ -19,5 +19,14 @@ def listar_categoria():
     categorias = Categoria.select()
     return  {'categorias':categorias}
 
+@router.delete(path='', response_model=CategoriaRead)
+def delete_categoria(id : int):
+    categoria = Categoria.get_or_none(id == Categoria.id)
+    categoria.delete_instance()
+    return categoria
 
 
+@router.get(path='/{ }', response_model=CategoriaRead)
+def listar_categoria_id(id: int):
+    categoria = Categoria.get_or_none(id == Categoria.id)
+    return categoria

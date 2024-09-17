@@ -19,6 +19,7 @@ class usuario_atualizado(BaseModel):
     nome: str
     email: str
     senha: str
+    foto: str
 
 class UsuarioReadAll(BaseModel):
     usuarios: list[UsuarioRead]
