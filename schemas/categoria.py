@@ -13,3 +13,8 @@ class CategoriaRead(BaseModel):
 
 class CategoriaList(BaseModel):
     categorias: list[CategoriaRead]
+
+
+class CategoriaUpdate(BaseModel):
+    nome_categoria:str
+  

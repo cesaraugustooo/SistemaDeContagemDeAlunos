@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,HTTPException
 from schemas.usuario import UsuarioCreate, UsuarioRead, UsuarioReadAll, usuario_atualizado
 from models.usuario import UsuarioDb
 from fastapi.responses import HTMLResponse
@@ -18,6 +18,8 @@ def listar_usuarios():
 @router.get(path="/{id_usuario}",response_model=UsuarioRead)
 def listar_usuarios(id_usuario: int):
     usuario= UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario nao encontrado")
     return usuario
 
 
@@ -33,7 +35,8 @@ def postar_usuario(novo_usuario: UsuarioCreate):
 @router.delete(path="/delete", response_model=UsuarioRead)
 def deletar_usuario(id_usuario: int):
     delete = UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
-
+    if not delete:
+        raise HTTPException(status_code=404, detail="Usuario nao encontrado")
     delete.delete_instance()
 
     return delete
@@ -43,7 +46,8 @@ def deletar_usuario(id_usuario: int):
 @router.patch(path="{id_usuario}", response_model=UsuarioRead)
 def atualizar_usuario(id_usuario, usuario_atualizado:usuario_atualizado):
     usuario = UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
-
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario nao encontrado")
     usuario.nif = usuario_atualizado.nif
     usuario.nome = usuario_atualizado.nome
     usuario.email = usuario_atualizado.email
