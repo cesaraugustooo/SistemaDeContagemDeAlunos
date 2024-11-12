@@ -4,22 +4,22 @@ from fastapi.exceptions import HTTPException
 from datetime import datetime, time
 
 from schemas.contagens import ContagemCreate,ContagemRead,ContagemReadAll,ContagemUpdate
-from models.contagens import ContagensDB
+from models.contagens import ContagensDB,UsuarioDb
 
 
-router = APIRouter(prefix='/Contagens', tags=['Contagens'] )
+router = APIRouter(prefix='/contagens', tags=['Contagens'] )
 
-@router.post(path='',response_model=ContagemRead)
-def criar_contagens(contagem : ContagemCreate):
-    Contagem = ContagensDB.create(**contagem.model_dump())
-    return Contagem
+@router.post(path='', response_model=ContagemRead)
+def criar_contagens(contagem: ContagemCreate):
+    try:
+        if not contagem.usuario: 
+            raise HTTPException(status_code=400, detail="Usuário não fornecido")
+        
+        nova_contagem = ContagensDB.create(**contagem.model_dump())  
+        return nova_contagem
 
-@router.get(path='/{id}',response_model=ContagemRead)
-def list_contagens(id : int):
-    contagens = ContagensDB.get_or_none(ContagensDB.id == id)
-    if not contagens:
-        raise HTTPException(status_code=404, detail="Contagem nao encontrada")
-    return contagens
+    except Exception:
+        raise HTTPException(status_code=400, detail="Erro ao criar contagem")
 
 
 
@@ -32,7 +32,7 @@ def list_all_contagens():
 
 
 
-@router.patch(path='',response_model=ContagemRead)
+@router.put(path='',response_model=ContagemRead)
 def list_contagens(id : int, con : ContagemUpdate,):
 
     contagens = ContagensDB.get_or_none(ContagensDB.id == id)

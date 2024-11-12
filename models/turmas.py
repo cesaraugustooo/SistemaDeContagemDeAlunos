@@ -1,4 +1,4 @@
-from peewee import CharField, Model, AutoField, ForeignKeyField
+from peewee import CharField, Model, AutoField, ForeignKeyField,DateField,BooleanField
 from config.database import database
 
 class Categoria(Model):
@@ -9,3 +9,12 @@ class Categoria(Model):
 
 
 
+class Turma(Model):
+    id = AutoField()
+    ano = DateField()
+    nome = CharField()
+    categoria_id = ForeignKeyField(Categoria, backref='turmas')
+    ativo = BooleanField(default=True)
+    
+    class Meta:
+        database = database

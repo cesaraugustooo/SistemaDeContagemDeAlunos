@@ -43,7 +43,7 @@ def deletar_usuario(id_usuario: int):
 
 
 
-@router.patch(path="{id_usuario}", response_model=UsuarioRead)
+@router.put(path="{id_usuario}", response_model=UsuarioRead)
 def atualizar_usuario(id_usuario, usuario_atualizado:usuario_atualizado):
     usuario = UsuarioDb.get_or_none(UsuarioDb.id == id_usuario)
     if not usuario:

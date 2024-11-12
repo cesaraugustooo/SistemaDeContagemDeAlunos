@@ -1,7 +1,7 @@
 from fastapi import APIRouter,HTTPException
-from schemas.categoria import CategoriaSchemaCreate,CategoriaSchema,CategoriaRead,CategoriaList,CategoriaUpdate
+from schemas.categoria import CategoriaSchemaCreate,CategoriaSchema,CategoriaRead,CategoriaList,CategoriaUpdate,TurmaCreate,TurmaBase,TurmaOut,TurmaUpdate
 from config.database import conect,end_database
-from models.turmas import Categoria
+from models.turmas import Categoria,Turma
 from fastapi.responses import HTMLResponse
 router = APIRouter(prefix='/categoria', tags=['Categorias'])
 
@@ -35,7 +35,7 @@ def listar_categoria_id(id: int):
         raise HTTPException(status_code=404, detail="Categoria nao encontrada")
     return categoria
 
-@router.patch(path='/{id}',response_model=CategoriaUpdate )
+@router.put(path='/{id}',response_model=CategoriaUpdate )
 def atualizar_categoria(id: int, update:CategoriaUpdate):
     categoria = Categoria.get_or_none(Categoria.id == id)
     if not categoria:
@@ -43,3 +43,4 @@ def atualizar_categoria(id: int, update:CategoriaUpdate):
     categoria.nome_categoria = update.nome_categoria
     categoria.save()
     return categoria
+

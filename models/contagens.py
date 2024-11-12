@@ -1,6 +1,6 @@
 from peewee import AutoField,CharField,Model,DateField,TimeField,IntegerField,ForeignKeyField
 from models.usuario import UsuarioDb
-from models.turmas import Categoria
+from models.turmas import Turma
 from config.database import database
 
 
@@ -10,7 +10,7 @@ class ContagensDB(Model):
     hora = TimeField()
     qtd_contagem = IntegerField()
     usuario = ForeignKeyField(model=UsuarioDb, backref='usuarios')
-    categoria = ForeignKeyField(model=Categoria, backref='categoria')
+    turma_id = ForeignKeyField(model=Turma, backref='turmas')
 
     class Meta:
         database = database

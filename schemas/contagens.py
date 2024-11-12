@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from schemas.categoria import CategoriaRead
+from schemas.categoria import CategoriaRead,TurmaOut
 from schemas.usuario import UsuarioRead
 from datetime import datetime, time
 
@@ -9,7 +9,7 @@ class ContagemCreate(BaseModel):
     hora : time
     qtd_contagem : int
     usuario : int
-    categoria : int
+    turma_id : int
 
 class ContagemRead(BaseModel):
     id : int
@@ -17,7 +17,7 @@ class ContagemRead(BaseModel):
     hora : time
     qtd_contagem : int
     usuario : UsuarioRead
-    categoria : CategoriaRead
+    turma_id : TurmaOut
 
 class ContagemUpdate(BaseModel):
     qtd_contagem : int
